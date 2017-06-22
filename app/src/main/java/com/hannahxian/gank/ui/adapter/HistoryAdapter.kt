@@ -1,6 +1,8 @@
 package com.hannahxian.gank.ui.adapter
 
 import com.chad.library.adapter.base.BaseQuickAdapter
+import com.chad.library.adapter.base.BaseViewHolder
+import com.hannahxian.gank.R
 import com.hannahxian.gank.repository.History
 
 /**
@@ -12,5 +14,9 @@ import com.hannahxian.gank.repository.History
  *  Description:
  *  Email:wangchengda1990@gmail.com
  **/
-class HistoryAdapter{
+class HistoryAdapter(layoutId:Int,data:List<History>) : BaseQuickAdapter<History,BaseViewHolder>(layoutId,data){
+    override fun convert(helper: BaseViewHolder?, item: History?) {
+        helper?.setText(R.id.content,"${item?.content}(${item?.date})");
+    }
+
 }

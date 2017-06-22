@@ -12,8 +12,10 @@ import com.hannahxian.gank.R
 import com.hannahxian.gank.net.Api
 import com.hannahxian.gank.repository.History
 import com.hannahxian.gank.ui.activity.MainActivity
+import com.hannahxian.gank.ui.adapter.HistoryAdapter
 import com.hannahxian.gank.utils.dismissProgress
 import com.hannahxian.gank.utils.showProgress
+import com.hannahxian.gank.utils.toast
 import io.reactivex.Scheduler
 import io.reactivex.android.schedulers.AndroidSchedulers
 import io.reactivex.schedulers.Schedulers
@@ -50,6 +52,7 @@ class HistoryFragment : Fragment() {
         super.onViewCreated(view, savedInstanceState)
 
         recyclerView.layoutManager = LinearLayoutManager(activity);
+        loadPublishedData();
 
     }
 
@@ -63,10 +66,18 @@ class HistoryFragment : Fragment() {
                 .observeOn(AndroidSchedulers.mainThread())
                 .subscribeOn(Schedulers.newThread())
                 .subscribe({
-
+                    result -> setUpRecyclerview(parseHtml(result.string()))
                 },{Log.d("gank","history data on error!")},{
                     activity?.dismissProgress();
                 });
+    }
+
+    private fun setUpRecyclerview(data:List<History>){
+        Log.d("gank","history setup recycleview size ${data.size}");
+        val adapter:HistoryAdapter  = HistoryAdapter(R.layout.item_history,data);
+        adapter.setOnItemClickListener { adapter, view, i -> activity?.toast("History item click ${i}") }
+
+        recyclerView.adapter = adapter;
     }
 
     private fun parseHtml(html : String):List<History>{
