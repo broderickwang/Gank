@@ -51,7 +51,7 @@ dependencies {
 
     compile 'com.squareup.okhttp3:logging-interceptor:3.8.0'
 
-
+    compile 'com.github.CymChad:BaseRecyclerViewAdapterHelper:2.9.18'
 }
 repositories {
     mavenCentral()

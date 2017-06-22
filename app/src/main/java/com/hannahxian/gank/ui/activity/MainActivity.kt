@@ -19,16 +19,20 @@ class MainActivity : AppCompatActivity() {
             when(item.itemId){
                 R.id.action_recommend ->{
                     Log.d("gank","select recommen")
+                    changeTab(0)
                 }
                 R.id.action_girl -> {
                     Log.d("gank","select girl")
+                    changeTab(1)
                 }
                 R.id.action_history ->{
                     Log.d("gank","select history")
+                    changeTab(2)
                 }
             }
             true;
         }
+        changeTab(0)
     }
 
     private fun changeTab(position:Int){
