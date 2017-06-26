@@ -22,8 +22,8 @@ interface Api {
     //http://gank.io/api/data/Android/10/1
     @GET("api/data/{type}/{pageSize}/{pageNumber}")
     fun getData(@Path("type") type:String,
-                @Path("pageSize") pageSize:String,
-                @Path("typpageNumbere") pageNumber:String):Observable<Result>
+                @Path("pageSize") pageSize:Int,
+                @Path("pageNumber") pageNumber:Int):Observable<Result>
 
     @GET("api/day/{year}/{month}/{day}")
     fun getDataByDate(@Path("year") year:String,

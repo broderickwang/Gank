@@ -6,6 +6,7 @@ import android.support.v4.app.Fragment
 import android.util.Log
 import com.hannahxian.gank.R
 import com.hannahxian.gank.ui.fragment.HistoryFragment
+import com.hannahxian.gank.ui.fragment.WelfFragement
 import kotlinx.android.synthetic.main.activity_main.*
 
 class MainActivity : AppCompatActivity() {
@@ -13,6 +14,7 @@ class MainActivity : AppCompatActivity() {
     var lastFragement : Fragment? = null ;
 
     var histroryFragment : HistoryFragment? = null;
+    var welfareFragement : WelfFragement? = null;
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -52,7 +54,16 @@ class MainActivity : AppCompatActivity() {
 
         when(position){
             0 -> {}
-            1 -> {}
+            1 -> {
+                welfareFragement = fragementManager.findFragmentByTag(WelfFragement::class.java.simpleName) as WelfFragement?;
+                if(welfareFragement != null){
+                    fragementTransaction.show(welfareFragement);
+                }else{
+                    welfareFragement = WelfFragement.newInstance();
+                    fragementTransaction.add(R.id.container,welfareFragement,HistoryFragment::class.java.simpleName);
+                }
+                lastFragement = welfareFragement;
+            }
             2 -> {
                 histroryFragment = fragementManager.findFragmentByTag(HistoryFragment::class.java.simpleName) as HistoryFragment?;
                 if(histroryFragment != null){
